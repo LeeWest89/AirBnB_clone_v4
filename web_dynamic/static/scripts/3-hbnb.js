@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const url = `http://${window.location.origin}`;
+const url = `http://${window.location.hostname}`;
 $('document').ready(() => {
   $('input:checkbox:checked').prop('checked', false);
 
