@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const url = `http://${window.location.origin}`;
+const url = `http://${window.location.hostname}`;
 $('document').ready(() => {
   $('input:checkbox:checked').prop('checked', false);
 
@@ -11,7 +11,7 @@ $('document').ready(() => {
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
 
-  $.get('${url}:5001/api/v1/status/', (dump) => {
+  $.get(`${url}:5001/api/v1/status/`, (dump) => {
     return dump.status === 'OK'
       ? $('div#api_status').addClass('available')
       : $('div#api_status').removeClass('available');
