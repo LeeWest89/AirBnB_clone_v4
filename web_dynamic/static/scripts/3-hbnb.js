@@ -11,9 +11,9 @@ $('document').ready(() => {
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
 
-  $.get('${url}:5001/api/v1/status/', (dump) => {
+  $.get(`${url}:5001/api/v1/status/`, (dump) => {
     return dump.status === 'OK'
       ? $('div#api_status').addClass('available')
       : $('div#api_status').removeClass('available');
-      });
   });
+});
