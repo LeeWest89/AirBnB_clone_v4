@@ -1,3 +1,4 @@
+#!/usr/bin/node
 $('document').ready(() => {
   $('input:checkbox:checked').prop('checked', false);
   

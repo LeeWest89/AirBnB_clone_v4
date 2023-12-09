@@ -1,3 +1,5 @@
+#!/usr/bin/node
+const url = window.location.origin;
 $('document').ready(() => {
   $('input:checkbox:checked').prop('checked', false);
 
@@ -9,13 +11,9 @@ $('document').ready(() => {
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
 
-  $.get('http://0.0.0.0:5001/api/v1/status/', (dump) => {
+  $.get('${url}:5001/api/v1/status/', (dump) => {
     return dump.status === 'OK'
       ? $('div#api_status').addClass('available')
-      : $.get('http://127.0.0.1:5001/api/v1/status/', (dump) => {
-        return dump.status === 'OK'
-          ? $('div#api_status').addClass('available')
-          : $('div#api_status').removeClass('available');
+      : $('div#api_status').removeClass('available');
       });
   });
-});
