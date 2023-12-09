@@ -29,53 +29,32 @@ $('document').ready(() => {
     contentType: 'application/json',
     data: '{}',
     success: function (data) {
-      for (let place of data) {
-        console.log(place);
-        const guest_s = 's';
-        const beds_s = 's';
-        const baths_s = 's';
-        // if (place.max_guest !== 1) { const guest_s = 's'; }
-        // if (place.number_rooms !== 1) { const beds_s = 's'; }
-        // if (place.number_bathrooms !== 1) { const baths_s = 's'; }
+      const dataSort = data.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+      for (const place of dataSort) {
+        // console.log(place);
+        let guestS = 's';
+        let bedsS = 's';
+        let bathsS = 's';
+        if (place.max_guest === 1) guestS = '';
+        if (place.number_rooms === 1) bedsS = '';
+        if (place.number_bathrooms === 1) bathsS = '';
         $('section.places').append(
           `<article>
             <div class="title_box">
-              <h2>${ place.name }</h2>
+              <h2>${place.name}</h2>
               <div class="price_by_night">$${place.price_by_night}</div>
             </div>
             <div class="information">
-              <div class="max_guest">${place.max_guest} Guest${guest_s}</div>
-                <div class="number_rooms">${place.number_rooms} Bedroom${beds_s}</div>
-                <div class="number_bathrooms">${place.number_bathrooms} Bathroom${baths_s}</div>
+              <div class="max_guest">${place.max_guest} Guest${guestS}</div>
+                <div class="number_rooms">${place.number_rooms} Bedroom${bedsS}</div>
+                <div class="number_bathrooms">${place.number_bathrooms} Bathroom${bathsS}</div>
             </div>
             <div class="description">
             ${place.description}
             </div>
           </article>`
         );
-      };
+      }
     }
   });
-
 });
-
-// const placesSection = $('.places');
-// for (let i = 0; i < data.length; i++) {
-//   const place = data[i];
-//   const placeArticle = $('<article>');
-//   const boxDiv = $('<div class="title_box>');
-//   boxDiv.append($('<h2>').text(place.name));
-//   boxDiv.append($('<div class="price_by_night>').text(`$${place.price_by_night}`));
-//   placeArticle.append(boxDiv);
-//   const infoDiv = $('<div class="information>');
-//   infoDiv.append($('<div class"max_guest">').text(`${place.max_guest} Guest${place.max_guest !== 1 ? 's' : ''}`));
-//   infoDiv.append($('<div class="number_rooms">').text(`${place.number_rooms} Bedroom${place.number_rooms !== 1 ? 's' : ''}`));
-//   infoDiv.append($('<div class="number_bathrooms">').text(`${place.number_bathrooms} Bathroom${place.number_bathrooms !== 1 ? 's' : ''}`));
-//   placeArticle.append(infoDiv);
-//   const userDiv = $('<div class="user>');
-//   userDiv.append($(`<b>Owner:</b> ${place.user.first_name} ${place.user.last_name}`));
-//   placeArticle.append(userDiv);
-//   const descDiv = $('<div class="description">').html(place.description);
-//   placeArticle.append(descDiv);
-//   placesSection.append(placeArticle);
-// }
