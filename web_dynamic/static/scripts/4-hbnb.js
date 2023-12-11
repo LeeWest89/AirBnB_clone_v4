@@ -57,7 +57,6 @@ $('document').ready(() => {
 
   $('button').on('click', () => {
     const amId = Object.keys(amenityDict);
-    console.log(amId);
     $.ajax({
       type: 'POST',
       url: `${url}:5001/api/v1/places_search/`,
