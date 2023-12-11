@@ -1,5 +1,4 @@
 #!/usr/bin/node
-const amenityDict = {};
 const url = `http://${window.location.hostname}`;
 $('document').ready(() => {
   $('input:checkbox:checked').prop('checked', false);
@@ -11,8 +10,6 @@ $('document').ready(() => {
     amenityThing = $('li input:checkbox:checked').map((_, obj) => $(obj).data('id')).get();
     amenityArray = $('li input:checkbox:checked').map((_, obj) => $(obj).data('name')).get();
     amenityDict = amenityThing.reduce((obj, key, idx) => ({ ...obj, [key]: amenityArray[idx] }), {});
-    // console.log(amenityThing);
-    // console.log(amenityArray);
     console.log(amenityDict);
     $('.amenities h4').text(amenityArray.join(', '));
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
@@ -59,8 +56,7 @@ $('document').ready(() => {
             </article>`
           );
         }
-      },
+      }
     });
-    console.log($('.places').children());
   });
 });

@@ -10,8 +10,6 @@ $('document').ready(() => {
     amenityThing = $('li input:checkbox:checked').map((_, obj) => $(obj).data('id')).get();
     amenityArray = $('li input:checkbox:checked').map((_, obj) => $(obj).data('name')).get();
     amenityDict = amenityThing.reduce((obj, key, idx) => ({ ...obj, [key]: amenityArray[idx] }), {});
-    // console.log(amenityThing);
-    // console.log(amenityArray);
     console.log(amenityDict);
     $('.amenities h4').text(amenityArray.join(', '));
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
@@ -31,7 +29,6 @@ $('document').ready(() => {
     success: function (data) {
       const dataSort = data.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
       for (const place of dataSort) {
-        // console.log(place);
         let guestS = 's';
         let bedsS = 's';
         let bathsS = 's';
