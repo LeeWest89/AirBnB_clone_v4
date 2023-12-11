@@ -42,11 +42,11 @@ $('document').ready(() => {
             </div>
             <div class="information">
               <div class="max_guest">${place.max_guest} Guest${guestS}</div>
-                <div class="number_rooms">${place.number_rooms} Bedroom${bedsS}</div>
-                <div class="number_bathrooms">${place.number_bathrooms} Bathroom${bathsS}</div>
+              <div class="number_rooms">${place.number_rooms} Bedroom${bedsS}</div>
+              <div class="number_bathrooms">${place.number_bathrooms} Bathroom${bathsS}</div>
             </div>
             <div class="description">
-            ${place.description}
+              ${place.description}
             </div>
           </article>`
         );
