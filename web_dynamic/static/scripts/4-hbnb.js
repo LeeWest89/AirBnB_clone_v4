@@ -21,6 +21,40 @@ $('document').ready(() => {
       : $('div#api_status').removeClass('available');
   });
 
+  $.ajax({
+    type: 'POST',
+    url: `${url}:5001/api/v1/places_search/`,
+    contentType: 'application/json',
+    data: '{}',
+    success: function (data) {
+      const dataSort = data.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
+      for (const place of dataSort) {
+        let guestS = 's';
+        let bedsS = 's';
+        let bathsS = 's';
+        if (place.max_guest === 1) guestS = '';
+        if (place.number_rooms === 1) bedsS = '';
+        if (place.number_bathrooms === 1) bathsS = '';
+        $('section.places').append(
+          `<article>
+            <div class="title_box">
+              <h2>${place.name}</h2>
+              <div class="price_by_night">$${place.price_by_night}</div>
+            </div>
+            <div class="information">
+              <div class="max_guest">${place.max_guest} Guest${guestS}</div>
+                <div class="number_rooms">${place.number_rooms} Bedroom${bedsS}</div>
+                <div class="number_bathrooms">${place.number_bathrooms} Bathroom${bathsS}</div>
+            </div>
+            <div class="description">
+            ${place.description}
+            </div>
+          </article>`
+        );
+      }
+    }
+  });
+
   $('button').on('click', () => {
     const amId = Object.keys(amenityDict);
     console.log(amId);
