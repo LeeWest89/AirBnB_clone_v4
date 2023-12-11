@@ -10,7 +10,6 @@ $('document').ready(() => {
     amenityThing = $('li input:checkbox:checked').map((_, obj) => $(obj).data('id')).get();
     amenityArray = $('li input:checkbox:checked').map((_, obj) => $(obj).data('name')).get();
     amenityDict = amenityThing.reduce((obj, key, idx) => ({ ...obj, [key]: amenityArray[idx] }), {});
-    console.log(amenityDict);
     $('.amenities h4').text(amenityArray.join(', '));
     if ($('.amenities h4').is(':empty')) $('.amenities h4').text('\xA0');
   });
@@ -56,12 +55,11 @@ $('document').ready(() => {
   });
 
   $('button').on('click', () => {
-    const amId = Object.keys(amenityDict);
     $.ajax({
       type: 'POST',
       url: `${url}:5001/api/v1/places_search/`,
       contentType: 'application/json',
-      data: JSON.stringify({ amenities: amId }),
+      data: JSON.stringify({ amenities: amenityThing }),
       success: function (data) {
         const dataSort = data.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0);
         $('section.places').empty();
